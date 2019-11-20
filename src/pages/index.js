@@ -9,20 +9,23 @@ import ArticlePreview from '../components/article-preview'
 class RootIndex extends React.Component {
   render() {
     const siteTitle = get(this, 'props.data.site.siteMetadata.title')
+    const sites = get(this, 'props.data.site.siteMetadata.sites')
+    const socialMedia = get(this, 'props.data.site.siteMetadata.socialMedia')
     const posts = get(this, 'props.data.allContentfulBlogPost.edges')
     const [author] = get(this, 'props.data.allContentfulPerson.edges')
 
     return (
-      <Layout location={this.props.location} >
+      <Layout location={this.props.location} sites={sites} socialMedia={socialMedia} >
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></link>
         <div style={{ background: '#fff' }}>
           <Helmet title={siteTitle} />
           <Hero data={author.node} />
           <div className="wrapper">
             <h2 className="section-headline">Recent articles</h2>
             <ul className="article-list">
-              {posts.map(({ node }) => {
+              {posts.map(({ node }, index) => {
                 return (
-                  <li key={node.slug}>
+                  <li key={index}>
                     <ArticlePreview article={node} />
                   </li>
                 )
@@ -42,6 +45,17 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+        description
+        sites {
+          icon
+          text
+          link
+        }
+        socialMedia {
+          icon
+          text
+          link
+        }
       }
     }
     allContentfulBlogPost(sort: { fields: [publishDate], order: DESC }) {
@@ -52,8 +66,8 @@ export const pageQuery = graphql`
           publishDate(formatString: "MMMM Do, YYYY")
           tags
           heroImage {
-            fluid(maxWidth: 350, maxHeight: 196, resizingBehavior: SCALE) {
-             ...GatsbyContentfulFluid_tracedSVG
+            fluid(maxWidth: 350, maxHeight: 196) {
+              ...GatsbyContentfulFluid_noBase64
             }
           }
           description {

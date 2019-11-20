@@ -1,13 +1,11 @@
 {
-  "name": "Contentful Gatsby Starter",
-  "description": "Gatsby starter for a Contentful project.",
+  "name": "Bendy's Blog",
+  "description": "Gatsby starter for a Contentful project for Bendy's blog.",
   "keywords": [
-    "contentful",
-    "gatsby",
-    "static",
-    "ssg"
+    "Bendy",
+    "Bendy Zhang"
   ],
-  "repository": "https://github.com/contentful-userland/gatsby-contentful-starter",
+  "repository": "https://github.com/bndynet/blog.bndy.net",
   "success_url": "/",
   "buildpacks": [
     {

@@ -1,12 +1,11 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import base from './base.css'
-import Container from './container'
-import Navigation from './navigation'
+import Footer from './footer'
 
 class Template extends React.Component {
   render() {
-    const { location, children } = this.props
+    const { location, children, socialMedia, sites } = this.props
     let header
 
     let rootPath = `/`
@@ -15,10 +14,28 @@ class Template extends React.Component {
     }
 
     return (
-      <Container>
-        <Navigation />
+      <div>
+        <header>
+          <div className="container">
+            <div className="inline-items">
+              {(sites || []).map(link => (
+                <a key={link.link} href={link.link} target="_blank">
+                  {link.text}
+                </a>
+              ))}
+            </div>
+            <div className="inline-items">
+              {(socialMedia || []).map(link => (
+                <a key={link.link} href={link.link} target="_blank">
+                  <i className={link.icon}></i>
+                </a>
+              ))}
+            </div>
+          </div>
+        </header>
         {children}
-      </Container>
+        <Footer links={socialMedia} />
+      </div>
     )
   }
 }
