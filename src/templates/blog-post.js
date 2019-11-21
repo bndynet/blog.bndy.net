@@ -4,8 +4,9 @@ import Helmet from 'react-helmet'
 import get from 'lodash/get'
 import Img from 'gatsby-image'
 import Layout from '../components/layout'
+import Banner from '../components/banner'
 
-import heroStyles from '../components/hero.module.css'
+import bannerStyles from '../components/banner.module.css'
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -13,12 +14,16 @@ class BlogPostTemplate extends React.Component {
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
 
     return (
-      <Layout location={this.props.location} >
+      <Layout
+        location={this.props.location}
+        sites={this.props.data.site.siteMetadata.sites}
+        socialMedia={this.props.data.site.siteMetadata.socialMedia} >
         <div style={{ background: '#fff' }}>
           <Helmet title={`${post.title} | ${siteTitle}`} />
-          <div className={heroStyles.hero}>
-            <Img className={heroStyles.heroImage} alt={post.title} fluid={post.heroImage.fluid} />
-          </div>
+          <Banner data={this.props.data.contentfulAsset} />
+          {/* <div className={bannerStyles.hero}>
+            <Img className={bannerStyles.heroImage} alt={post.title} fluid={post.heroImage.fluid} />
+          </div> */}
           <div className="wrapper">
             <h1 className="section-headline">{post.title}</h1>
             <p
@@ -45,9 +50,7 @@ export default BlogPostTemplate
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
     site {
-      siteMetadata {
-        title
-      }
+      ...SiteInformation
     }
     contentfulBlogPost(slug: { eq: $slug }) {
       title
@@ -62,6 +65,9 @@ export const pageQuery = graphql`
           html
         }
       }
+    }
+    contentfulAsset(file: {fileName: {eq: "home-banner.png"}}) {
+      ...AssetInformation
     }
   }
 `

@@ -1,11 +1,11 @@
-.hero {
+.banner {
   position: relative;
   background: #000;
   color: #fff;
   text-align: center;
 }
 
-.heroImage {
+.bannerImage {
   /*
     Ensure golden ratio for the hero size while limiting it to some extend to
     the viewport width
@@ -14,33 +14,33 @@
   max-height: 400px;
 }
 
-.heroDetails {
+.bannerDetails {
   position: absolute;
   background: rgba(0, 0, 0, 0.7);
-  left: 50%;
   bottom: 0;
-  transform: translate(-50%, 0);
   font-size: 14px;
-  padding: 0 0.5em;
+  padding: 1em;
+  text-align: center;
+  width: 100%;
 }
 
 @media(min-width: 600px) {
-  .heroDetails {
+  .bannerDetails {
     font-size: 16px;
   }
 }
 
 @media(min-width: 1000px) {
-  .heroDetails {
+  .bannerDetails {
     font-size: 20px;
   }
 }
 
-.heroHeadline {
+.bannerHeadline {
   margin: 0;
 }
 
-.heroTitle {
+.bannerTitle {
   margin: 0;
   font-size: 1.125em;
   font-weight: bold;

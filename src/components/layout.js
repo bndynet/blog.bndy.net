@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import get from 'lodash/get'
 import base from './base.css'
 import Footer from './footer'
 
 class Template extends React.Component {
   render() {
-    const { location, children, socialMedia, sites } = this.props
+    const { location, children, sites, socialMedia } = this.props
     let header
 
     let rootPath = `/`
@@ -41,3 +42,31 @@ class Template extends React.Component {
 }
 
 export default Template
+
+export const query = graphql`
+  fragment SiteInformation on Site {
+    siteMetadata {
+      title
+      description
+      sites {
+        icon
+        text
+        link
+      }
+      socialMedia {
+        icon
+        text
+        link
+      }
+    }
+  }
+  fragment AssetInformation on ContentfulAsset {
+    id
+    title
+    description
+    file {
+      fileName
+      url
+    }
+  }
+`
