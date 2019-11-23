@@ -10,7 +10,9 @@
     Ensure golden ratio for the hero size while limiting it to some extend to
     the viewport width
   */
-  height: 61.8vh;
+  display: inline-block;
+  width: inherit;
+  max-width: 100%;
   max-height: 400px;
 }
 
@@ -19,7 +21,7 @@
   background: rgba(0, 0, 0, 0.7);
   bottom: 0;
   font-size: 14px;
-  padding: 1em;
+  padding: 1em 0;
   text-align: center;
   width: 100%;
 }

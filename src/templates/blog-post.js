@@ -5,6 +5,7 @@ import get from 'lodash/get'
 import Img from 'gatsby-image'
 import Layout from '../components/layout'
 import Banner from '../components/banner'
+import { convertContentfulAsset2Banner } from '../utils'
 
 import bannerStyles from '../components/banner.module.css'
 
@@ -12,6 +13,10 @@ class BlogPostTemplate extends React.Component {
   render() {
     const post = get(this.props, 'data.contentfulBlogPost')
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
+    let banner = convertContentfulAsset2Banner(this.props.data.contentfulAsset)
+    if (post.heroImage) {
+      banner = { image: post.heroImage.file.url, fullWidth: false };
+    }
 
     return (
       <Layout
@@ -20,10 +25,7 @@ class BlogPostTemplate extends React.Component {
         socialMedia={this.props.data.site.siteMetadata.socialMedia} >
         <div style={{ background: '#fff' }}>
           <Helmet title={`${post.title} | ${siteTitle}`} />
-          <Banner data={this.props.data.contentfulAsset} />
-          {/* <div className={bannerStyles.hero}>
-            <Img className={bannerStyles.heroImage} alt={post.title} fluid={post.heroImage.fluid} />
-          </div> */}
+          <Banner data={banner} />
           <div className="wrapper">
             <h1 className="section-headline">{post.title}</h1>
             <p
@@ -59,6 +61,9 @@ export const pageQuery = graphql`
         fluid(maxWidth: 1180, background: "rgb:000000") {
           ...GatsbyContentfulFluid_tracedSVG
         }
+        file {
+          url
+        }
       }
       body {
         childMarkdownRemark {
@@ -66,7 +71,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    contentfulAsset(file: {fileName: {eq: "home-banner.png"}}) {
+    contentfulAsset(file: {fileName: {eq: "blog-post-banner.png"}}) {
       ...AssetInformation
     }
   }
