@@ -1,6 +1,5 @@
 import React from 'react'
-import { Link } from 'gatsby'
-import get from 'lodash/get'
+import { Link, graphql } from 'gatsby'
 import base from './base.css'
 import Footer from './footer'
 
@@ -67,6 +66,13 @@ export const query = graphql`
     file {
       fileName
       url
+    }
+    fluid(
+      maxWidth: 2000
+      resizingBehavior: PAD
+      background: "rgb:000000"
+    ) {
+      ...GatsbyContentfulFluid_tracedSVG
     }
   }
 `

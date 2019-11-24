@@ -2,12 +2,9 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 import get from 'lodash/get'
-import Img from 'gatsby-image'
 import Layout from '../components/layout'
 import Banner from '../components/banner'
 import { convertContentfulAsset2Banner } from '../utils'
-
-import bannerStyles from '../components/banner.module.css'
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -15,7 +12,10 @@ class BlogPostTemplate extends React.Component {
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
     let banner = convertContentfulAsset2Banner(this.props.data.contentfulAsset)
     if (post.heroImage) {
-      banner = { image: post.heroImage.file.url, fullWidth: false };
+      banner = {
+        image: post.heroImage.file.url,
+        fullWidth: false,
+      };
     }
 
     return (
@@ -58,9 +58,6 @@ export const pageQuery = graphql`
       title
       publishDate(formatString: "MMMM Do, YYYY")
       heroImage {
-        fluid(maxWidth: 1180, background: "rgb:000000") {
-          ...GatsbyContentfulFluid_tracedSVG
-        }
         file {
           url
         }

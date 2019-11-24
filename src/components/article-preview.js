@@ -10,8 +10,7 @@ export default ({ article }) => (
       <Img
         className={styles.previewImagewrapper}
         alt={article.title}
-        fluid={article.heroImage.fluid}
-        imgStyle={{ objectFit: 'contain', height: 'inherit' }}
+        fixed={article.heroImage.fixed}
       />
     )}
     <div className={styles.preivewBody}>

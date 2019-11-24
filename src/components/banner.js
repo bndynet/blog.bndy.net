@@ -9,11 +9,16 @@ export default ({ data }) => {
   }
   return (
     <div className={styles.banner}>
-      <img
-        className={styles.bannerImage}
-        src={data.image}
-        style={{ width: data.fullWidth ? '100%' : '' }}
-      />
+      {data.imageFluid &&
+        <Img fluid={data.imageFluid} />
+      }
+      {!data.imageFluid &&
+        <img
+          className={styles.bannerImage}
+          src={data.image}
+          style={{ width: data.fullWidth ? '100%' : '' }}
+        />
+      }
       {(data.title || data.description) && (
         <div className={styles.bannerDetails}>
           <h3 className={styles.bannerHeadline}>{data.title}</h3>

@@ -3,5 +3,6 @@ export function convertContentfulAsset2Banner(asset) {
     title: asset.title,
     description: asset.description,
     image: asset.file.url,
+    imageFluid: asset.fluid,
   };
 }
