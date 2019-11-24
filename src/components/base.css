@@ -95,6 +95,10 @@ pre {
   border-radius: 4px;
 }
 
+ol, ul {
+  padding-left: 1em;
+}
+
 .container {
   width: 1000px;
   margin: 0 auto;
